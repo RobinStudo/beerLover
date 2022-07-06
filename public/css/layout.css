@@ -1,0 +1,75 @@
+@import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@700&family=Khula:wght@300;400;600&display=swap%27');
+
+:root{
+    --Vert : #458C6C;
+    --Jaune : #E49C52;
+    --Orange : #DF6941;
+    --Blanc : #E5DFD3;
+    --Noir : #3C3D42;
+    --Gris : #CAC6BD;
+}
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background-color: var(--Jaune);
+    font-family: 'Khula', sans-serif;
+}
+
+nav{
+    display: flex;
+    justify-content: space-between;
+    background-color: var(--Vert);
+    align-items: center;
+    padding: 10px;
+}
+
+ul{
+    display: flex;
+    justify-content: space-around;
+    list-style: none;
+}
+
+ul li{
+    padding: 10px;
+}
+
+ul li a{
+    text-decoration: none;
+    color: var(--Blanc);
+}
+
+ul li a:hover{
+    color: var(--Jaune);
+}
+
+nav p{
+    color : var(--Blanc);
+    font-size: 1.7rem;
+    font-family: 'Comic Neue', cursive;
+}
+
+footer {
+    background-color: var(--Vert);
+    color: var(--Blanc);
+}
+
+.rights{
+    width: 100vw;
+    text-align: center;
+    padding: 20px;
+}
+
+.footer-container{
+    display: flex;
+    justify-content: space-around;
+}
+
+.fa-brands{
+    font-size: 30px;
+    margin: 5px;
+}
