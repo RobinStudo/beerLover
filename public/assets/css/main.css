@@ -1,0 +1,152 @@
+/* ---- VARIABLES & NORMALIZE ---- */
+:root {
+    --color-primary: #1e0b02;
+    --color-secondary: #35352e;
+    --color-light: #FFC837;
+    --color-white: #F5F5DC;
+    --color-orange: #DD6315;
+    --color-danger: #711b1b;
+    --color-success: #216d41;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: var(--color-white);
+    font-size: 16px;
+    font-family: sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 100vh;
+}
+
+/* ---- HEADER ---- */
+header {
+    background: var(--color-light) ;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 50px;
+    box-shadow: 1px 1px 3px 0 rgba(30, 11, 2, 0.24);
+}
+
+header a {
+    text-decoration: none;
+}
+
+header img {
+    width: 250px;
+}
+
+header div {
+    min-width: 400px;
+}
+
+header div>a {
+    text-transform: uppercase;
+    color: var(--color-secondary);
+    font-size: 0.8rem;
+    display: block;
+    text-align: right;
+}
+
+header nav ul {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    margin: 15px 0;
+}
+
+header nav ul li {
+    list-style-type: none;
+}
+
+header nav a {
+    font-size: 1.2rem;
+    color: var(--color-primary);
+    font-weight: 600;
+    transition: 0.2s linear color;
+}
+
+header a:hover {
+    color: var(--color-orange);
+}
+
+/* ---- MAIN ---- */
+main {
+    flex-grow: 1;
+    padding: 20px 10px;
+}
+
+h1 {
+    color: var(--color-primary);
+    text-align: center;
+}
+
+
+/* ---- FOOTER ----*/
+footer>div {
+    padding: 50px;
+    background-color: var(--color-light);
+    display: flex;
+    justify-content: space-between;
+}
+
+footer>div a, footer>div p {
+    color: var(--color-primary)
+}
+
+footer>div a:hover {
+    color: var(--color-orange)
+}
+
+footer>div a, footer>div p:first-of-type {
+    font-weight: 600;
+}
+
+footer>div ul li {
+    list-style-type: none;
+}
+
+footer>div ul li, footer>div p {
+    padding-bottom: 5px;
+}
+
+footer a {
+    text-decoration: none;
+    transition: 0.2s linear color;
+}
+
+footer div.social {
+    display: flex;
+    align-items: center;
+    gap: 35px;
+}
+
+footer div.social a img {
+    width: 30px;
+}
+
+footer>p {
+    background-color: var(--color-primary);
+    color: var(--color-light);
+    text-align: center;
+    padding: 8px 5px;
+}
+
+footer>p a {
+    display: block;
+    color: var(--color-white);
+    padding-top: 5px;
+    font-size: 0.7rem;
+    transition: 0.2s linear color;
+}
+
+footer>p a:hover {
+    color: var(--color-orange);
+}
