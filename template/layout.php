@@ -3,12 +3,14 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link href="assets/css/main.css" rel="stylesheet"/>
+        <link href="assets/css/main.css" rel="stylesheet" />
         <title><?php echo $config['title'] ?? 'BeerLover'; ?></title>
     </head>
     <body>
         <header>
-            <a href="#"><img src="assets/img/logo.png" alt="Logo de Beer Lover, votre référence houblonnée !"/></a>
+            <a href="#">
+                <img src="assets/img/logo.png" alt="Logo de Beer Lover, votre référence houblonnée !"/>
+            </a>
             <div>
                 <a href="#">Se connecter</a>
                 <nav>
@@ -25,7 +27,7 @@
         <main>
             <?php require $config['path']; ?>
         </main>
-    
+
         <footer>
             <div><ul>
                     <li><a href="#">Accueil</a></li>
@@ -54,7 +56,9 @@
             </div>
             <p>
                 BeerLover, votre cave à bières numérique - © <?php echo date("Y")?>
-                <a href="#">Politique de confidentialité</a>
+                <a href="#">
+                    Politique de confidentialité
+                </a>
             </p>
         </footer>
     </body>
