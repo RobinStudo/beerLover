@@ -2,14 +2,13 @@
 
 namespace App\Controller;
 
-use App\Core\ViewManager;
+use App\Core\Controller\AbstractController;
 
-class BeerController
+class BeerController extends AbstractController
 {
     public function list(): void
     {
-        $view = new ViewManager();
-        $view->render('beer/list', [
+        $this->view->render('beer/list', [
             'title' => 'Découvrez notre catalogue de breuvages extraordinairement houblonnés',
         ]);
     }

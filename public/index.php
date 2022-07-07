@@ -6,4 +6,3 @@ use App\Core\Kernel;
 $kernel = new Kernel();
 $kernel->handle();
 
-// Adapter le kernel et le router
