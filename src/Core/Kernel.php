@@ -14,7 +14,7 @@ class Kernel
         $this->container = new Container();
     }
 
-    public function handle()
+    public function handle(): void
     {
         $uri = $_SERVER['PATH_INFO'] ?? '/';
 
@@ -24,7 +24,7 @@ class Kernel
         if ($route) {
             $controllerName = $route->getController();
             $method = $route->getMethod();
-            
+
             $controller = $this->container->get($controllerName);
             $controller->$method();
         } else {
