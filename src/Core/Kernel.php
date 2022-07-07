@@ -2,6 +2,8 @@
 
 namespace App\Core;
 
+use App\Core\Router\Router;
+
 class Kernel
 {
     public function handle()
@@ -11,12 +13,13 @@ class Kernel
         $router = new Router();
         $route = $router->match($uri);
 
-        if($route){
-            $method = $route['method'];
+        if ($route) {
+            $controllerName = $route->getController();
+            $method = $route->getMethod();
             
-            $controller = new $route['controller']();
+            $controller = new $controllerName();
             $controller->$method();
-        }else{
+        } else {
             http_response_code(404);
         }
     }
