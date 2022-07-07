@@ -150,3 +150,17 @@ footer>p a {
 footer>p a:hover {
     color: var(--color-orange);
 }
+
+/* ---- CARD ----*/
+.card-container{
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin: 20px 0;
+}
+
+.card{
+    padding: 10px;
+    border-radius: 5px;
+    background-color: white;
+}
