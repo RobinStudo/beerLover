@@ -2,13 +2,13 @@
 
 namespace App\Entity;
 
-use App\Repository\StyleRepository;
-
-class Style
+class Beer
 {
     private int $id;
     private string $name;
     private string $slug;
+    private string $picture;
+    private Style $style;
 
     public function getId(): int
     {
@@ -34,14 +34,29 @@ class Style
     {
         return $this->slug;
     }
-    
+
     public function setSlug(string $slug): void
     {
         $this->slug = $slug;
     }
 
-    public static function getRepository(): string
+    public function getPicture(): string
     {
-        return StyleRepository::class;
+        return $this->picture;
+    }
+
+    public function setPicture(string $picture): void
+    {
+        $this->picture = $picture;
+    }
+
+    public function getStyle(): Style
+    {
+        return $this->style;
+    }
+
+    public function setStyle(Style $style): void
+    {
+        $this->style = $style;
     }
 }

@@ -20,8 +20,6 @@ class DatabaseManager
     {
         $stmt = $this->db->prepare($query);
         $stmt->execute();
-        $entries = $stmt->fetchAll();
-
-        return $entries;
+        return $stmt->fetchAll();
     }
 }

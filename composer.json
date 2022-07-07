@@ -15,6 +15,7 @@
     "require": {
         "ext-yaml": "*",
         "ext-pdo": "*",
-        "php-di/php-di": "^6.4"
+        "php-di/php-di": "^6.4",
+        "symfony/var-dumper": "^6.1"
     }
 }

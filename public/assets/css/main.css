@@ -164,3 +164,9 @@ footer>p a:hover {
     border-radius: 5px;
     background-color: white;
 }
+
+.card img{
+    width: 300px;
+    aspect-ratio: 1;
+    object-fit: cover;
+}
