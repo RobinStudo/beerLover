@@ -2,7 +2,10 @@
 
 namespace App\Entity;
 
-class Beer
+use App\Core\Orm\EntityInterface;
+use App\Repository\BeerRepository;
+
+class Beer implements EntityInterface
 {
     private int $id;
     private string $name;
@@ -58,5 +61,10 @@ class Beer
     public function setStyle(Style $style): void
     {
         $this->style = $style;
+    }
+
+    public static function getRepository(): string
+    {
+        return BeerRepository::class;
     }
 }

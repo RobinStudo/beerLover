@@ -2,9 +2,10 @@
 
 namespace App\Entity;
 
+use App\Core\Orm\EntityInterface;
 use App\Repository\StyleRepository;
 
-class Style
+class Style implements EntityInterface
 {
     private int $id;
     private string $name;

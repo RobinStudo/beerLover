@@ -21,8 +21,10 @@ abstract class AbstractRepository
     public function find(int $id)
     {
         $query = 'SELECT * FROM ' . $this->getTable();
-        $query .= ' WHERE id = ' . $id; // TODO - Used prepared query
-        $entry = $this->database->query($query)[0];
+        $query .= ' WHERE id = :id';
+        $entry = $this->database->query($query, [
+            'id' => $id,
+        ])[0];
         return $this->buildEntry($entry);
     }
 

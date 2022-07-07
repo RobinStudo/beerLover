@@ -2,7 +2,10 @@
 
 namespace App\Entity;
 
-class Brewery
+use App\Core\Orm\EntityInterface;
+use App\Repository\BreweryRepository;
+
+class Brewery implements EntityInterface
 {
     private int $id;
     private string $name;
@@ -47,5 +50,10 @@ class Brewery
     public function setCountry(string $country): void
     {
         $this->country = $country;
+    }
+
+    public static function getRepository(): string
+    {
+        return BreweryRepository::class;
     }
 }

@@ -16,9 +16,14 @@ class DatabaseManager
         ]);
     }
 
-    public function query(string $query): array
+    public function query(string $query, array $parameters = []): array
     {
         $stmt = $this->db->prepare($query);
+
+        foreach ($parameters as $key => $parameter) {
+            $stmt->bindValue($key, $parameter);
+        }
+
         $stmt->execute();
         return $stmt->fetchAll();
     }
