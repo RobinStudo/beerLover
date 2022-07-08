@@ -5,6 +5,7 @@ namespace App\Core;
 use App\Core\Router\Router;
 use DI\Container;
 
+// Il gère la vie de la requête et la dispatch aux contrôlleurs 
 class Kernel
 {
     private Container $container;

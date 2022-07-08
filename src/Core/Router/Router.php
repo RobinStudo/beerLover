@@ -2,6 +2,7 @@
 
 namespace App\Core\Router;
 
+// Il gère le système de routes
 class Router
 {
     const CONFIG_PATH = '../config/routes.yaml';
@@ -12,6 +13,7 @@ class Router
         $this->loadRoutes();
     }
 
+    // Permet d'associer un objet Route avec ce qui se trouve dans l'URL
     public function match(string $uri): ?Route
     {
         foreach ($this->routes as $route) {

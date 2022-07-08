@@ -2,6 +2,7 @@
 
 namespace App\Core\Router;
 
+// Modèle représentant les routes
 class Route
 {
     private string $name;

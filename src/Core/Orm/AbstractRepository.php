@@ -5,6 +5,8 @@ namespace App\Core\Orm;
 use DI\Container;
 use ReflectionMethod;
 
+// Les repositories permettent d'interroger la base de données
+// Un par table héritant du AbstractRepository
 abstract class AbstractRepository
 {
     public function __construct(private DatabaseManager $database, private Container $container){}

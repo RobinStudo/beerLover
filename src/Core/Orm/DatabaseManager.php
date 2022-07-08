@@ -4,6 +4,7 @@ namespace App\Core\Orm;
 
 use PDO;
 
+// Gére la connexion et les requêtes à la base de données
 class DatabaseManager
 {
     private PDO $db;
