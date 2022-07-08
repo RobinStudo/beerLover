@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Core\Controller\AbstractController;
-use App\Core\Validator\Constraint\NotBlank;
+use App\Core\Validator\Constraint;
 use App\Core\Validator\Validator;
 use App\Core\ViewManager;
 
@@ -23,16 +23,18 @@ class UserController extends AbstractController
 
             $errors = $this->validator->validate($formData, [
                 'username' => [
-                    new NotBlank("Vous devez saisir un nom d'utilisateur"),
+                    new Constraint\NotBlank("Vous devez saisir un nom d'utilisateur"),
+                    new Constraint\Length("Votre nom d'utilisateur doit contenir entre 5 et 25 caractères", 5, 25),
                 ],
                 'email' => [
-                    new NotBlank(),
+                    new Constraint\NotBlank("Vous devez saisir un e-mail"),
+                    new Constraint\Email(),
                 ],
+                'password' => [
+                    new Constraint\NotBlank("Vous devez saisir un mot de passe"),
+                    new Constraint\Length("Votre mot de passe doit contenir entre 8 et 30 caractères", 8, 30),
+                ]
             ]);
-
-            // Valider la longeur du nom d'utilisateur => 5 > 25
-            // Valider le format de l'email
-            // Valider la longueur du mot de passe => 8 > 30
 
             dump($errors);
         }
