@@ -46,19 +46,23 @@ abstract class AbstractRepository
         $entity = new $entityType();
 
         foreach ($entry as $key => $row) {
-            $setter = sprintf('set%s', $this->formatKey($key));
+            $setter = sprintf('set%s', $this->formatKey($key)); // setId, setName
             if(method_exists($entity, $setter)){
 
                 $reflection = new ReflectionMethod($entity, $setter);
-                if ($reflection->getParameters()[0]->getType()->isBuiltin()) {
+                $subEntityType = $reflection->getParameters()[0]->getType();
+                if ($subEntityType->isBuiltin()) {
                     $entity->$setter($row);
-                } else {
-                    $subEntityName = $reflection->getParameters()[0]->getType()->getName();
+                    continue;
+                }
+
+                // Permet de s'assurer que le type attendu par le setter implemente bien l'interface EntityInterface
+                if (is_subclass_of($subEntityType->getName(), EntityInterface::class)) {
+                    $subEntityName = $subEntityType->getName();
                     $repository = $this->container->get($subEntityName::getRepository());
                     $subEntity = $repository->find($row);
                     $entity->$setter($subEntity);
                 }
-
             }
         }
 
