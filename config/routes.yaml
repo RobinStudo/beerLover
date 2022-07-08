@@ -17,3 +17,8 @@ beerSingle:
     uri: /biere
     controller: App\Controller\BeerController
     method: single
+
+userRegister:
+    uri: /inscription
+    controller: App\Controller\UserController
+    method: register
