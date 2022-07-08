@@ -13,7 +13,7 @@
             </a>
             <div>
                 <div class="user-account">
-                    <a href="#">Inscription</a>
+                    <a href="<?php echo $this->router->buildLink('userRegister'); ?>">Inscription</a>
                     <a href="#">Se connecter</a>
                 </div>
                 <nav>
