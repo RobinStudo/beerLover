@@ -12,3 +12,8 @@ beerList:
     uri: /bieres
     controller: App\Controller\BeerController
     method: list
+
+beerSingle:
+    uri: /biere
+    controller: App\Controller\BeerController
+    method: single

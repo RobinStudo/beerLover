@@ -24,10 +24,15 @@ abstract class AbstractRepository
     {
         $query = 'SELECT * FROM ' . $this->getTable();
         $query .= ' WHERE id = :id';
-        $entry = $this->database->query($query, [
+        $entries = $this->database->query($query, [
             'id' => $id,
-        ])[0];
-        return $this->buildEntry($entry);
+        ]);
+
+        if(count($entries) === 0){
+            return null;
+        }
+
+        return $this->buildEntry(array_shift($entries));
     }
 
     private function buildEntries(array $entries): array
