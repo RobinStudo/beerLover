@@ -12,7 +12,10 @@
                 <img src="assets/img/logo.png" alt="Logo de Beer Lover, votre référence houblonnée !"/>
             </a>
             <div>
-                <a href="#">Se connecter</a>
+                <div class="user-account">
+                    <a href="#">Inscription</a>
+                    <a href="#">Se connecter</a>
+                </div>
                 <nav>
                     <ul>
                         <li>

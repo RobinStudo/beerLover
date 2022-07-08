@@ -37,6 +37,7 @@ header {
 
 header a {
     text-decoration: none;
+    color: inherit;
 }
 
 header img {
@@ -47,12 +48,16 @@ header div {
     min-width: 400px;
 }
 
-header div>a {
+header .user-account{
     text-transform: uppercase;
     color: var(--color-secondary);
     font-size: 0.8rem;
-    display: block;
     text-align: right;
+}
+
+header .user-account > a:not(:last-child){
+    padding-right: 5px;
+    border-right: 2px solid var(--color-secondary);
 }
 
 header nav ul {
