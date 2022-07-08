@@ -8,17 +8,25 @@
     </head>
     <body>
         <header>
-            <a href="#">
+            <a href="<?php echo $this->router->buildLink('mainHome'); ?>">
                 <img src="assets/img/logo.png" alt="Logo de Beer Lover, votre référence houblonnée !"/>
             </a>
             <div>
                 <a href="#">Se connecter</a>
                 <nav>
                     <ul>
-                        <li><a href="#">Accueil</a></li>
-                        <li><a href="#">Nos bières</a></li>
-                        <li><a href="#">À propos</a></li>
-                        <li><a href="#">Contact</a></li>
+                        <li>
+                            <a href="<?php echo $this->router->buildLink('mainHome'); ?>">Accueil</a>
+                        </li>
+                        <li>
+                            <a href="<?php echo $this->router->buildLink('beerList'); ?>">Nos bières</a>
+                        </li>
+                        <li>
+                            <a href="<?php echo $this->router->buildLink('mainAbout'); ?>">À propos</a>
+                        </li>
+                        <li>
+                            <a href="#">Contact</a>
+                        </li>
                     </ul>
                 </nav>
             </div>
@@ -29,11 +37,20 @@
         </main>
 
         <footer>
-            <div><ul>
-                    <li><a href="#">Accueil</a></li>
-                    <li><a href="#">Nos bières</a></li>
-                    <li><a href="#">À propos</a></li>
-                    <li><a href="#">Contact</a></li>
+            <div>
+                <ul>
+                    <li>
+                        <a href="<?php echo $this->router->buildLink('mainHome'); ?>">Accueil</a>
+                    </li>
+                    <li>
+                        <a href="<?php echo $this->router->buildLink('beerList'); ?>">Nos bières</a>
+                    </li>
+                    <li>
+                        <a href="<?php echo $this->router->buildLink('mainAbout'); ?>">À propos</a>
+                    </li>
+                    <li>
+                        <a href="#">Contact</a>
+                    </li>
                 </ul>
                 <div>
                     <p>

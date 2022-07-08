@@ -2,6 +2,9 @@
 
 namespace App\Core\Router;
 
+use Exception;
+
+
 // Il gère le système de routes
 class Router
 {
@@ -23,6 +26,17 @@ class Router
         }
 
         return null;
+    }
+
+    public function buildLink(string $routeName): string
+    {
+        foreach ($this->routes as $route) {
+            if ($route->getName() === $routeName) {
+                return $route->getUri();
+            }
+        }
+
+        throw new Exception("Unable to find route : " . $routeName);
     }
 
     private function loadRoutes(): void
