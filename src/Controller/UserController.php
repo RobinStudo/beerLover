@@ -42,13 +42,14 @@ class UserController extends AbstractController
                 ],
             ]);
 
-            
+
         }
 
         $this->view->render('user/register', [
             'title' => 'Rejoignez la communauté des BeerLovers 💖',
         ], [
             'formErrors' => $errors ?? [],
+            'formData' => $formData ?? [],
         ]);
     }
 }
