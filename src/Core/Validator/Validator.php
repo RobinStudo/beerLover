@@ -9,7 +9,7 @@ class Validator
         $errors = [];
 
         foreach ($constraints as $key => $fieldConstraints) {
-            $value = $data[$key];
+            $value = $data[$key] ?? null;
 
             foreach ($fieldConstraints as $constraint) {
                 if(!$constraint->validate($value)){

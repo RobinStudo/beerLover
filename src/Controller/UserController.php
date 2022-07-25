@@ -20,6 +20,7 @@ class UserController extends AbstractController
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['user'])) {
             $formData = $_POST['user'];
+            dump($formData);
 
             $errors = $this->validator->validate($formData, [
                 'username' => [
@@ -33,7 +34,13 @@ class UserController extends AbstractController
                 'password' => [
                     new Constraint\NotBlank("Vous devez saisir un mot de passe"),
                     new Constraint\Length("Votre mot de passe doit contenir entre 8 et 30 caractères", 8, 30),
-                ]
+                ],
+                'age' => [
+                    new Constraint\NotBlank("Vous devez être majeur pour créer un compte"),
+                ],
+                'cgu' => [
+                    new Constraint\NotBlank("Vous devez accepter les conditions du service"),
+                ],
             ]);
 
             dump($errors);
