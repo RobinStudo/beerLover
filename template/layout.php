@@ -81,5 +81,13 @@
                 </a>
             </p>
         </footer>
+
+        <div class="notification-center">
+            <?php foreach ($this->notificationManager->getAll() as $notification) { ?>
+                <div class="notification notification-<?php echo $notification->getType(); ?>">
+                    <?php echo $notification->getMessage(); ?>
+                </div>
+            <?php } ?>
+        </div>
     </body>
 </html>

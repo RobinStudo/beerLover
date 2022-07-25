@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use App\Core\Controller\AbstractController;
+use App\Core\Notification\Notification;
+use App\Core\Notification\NotificationManager;
 use App\Core\Validator\Constraint;
 use App\Core\Validator\Validator;
 use App\Core\ViewManager;
@@ -13,6 +15,7 @@ class UserController extends AbstractController
     public function __construct(
         protected ViewManager $view,
         private Validator $validator,
+        private NotificationManager $notificationManager,
         private UserRepository $userRepository
     ){
         parent::__construct($this->view);
@@ -48,9 +51,10 @@ class UserController extends AbstractController
                 $formData['hashedPassword'] = password_hash($formData['password'], PASSWORD_DEFAULT);
                 $this->userRepository->insert($formData);
 
+                $notification = new Notification('Compte créé avec succès', Notification::TYPE_SUCCESS);
+                $this->notificationManager->add($notification);
             }
-
-            // Afficher un message de confirmation
+            
             // Envoyer un mail de confirmation
             // Rediriger sur la page de connexion
         }
