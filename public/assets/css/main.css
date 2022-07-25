@@ -218,6 +218,16 @@ form{
     line-height: 0.4;
 }
 
+.form-group .form-errors{
+    list-style-type: none;
+}
+
+.form-group .form-errors li{
+    border-left: 3px solid var(--color-danger);
+    padding-left: 5px;
+    margin: 5px 0;
+}
+
 .form-action{
     text-align: center;
 }

@@ -20,7 +20,6 @@ class UserController extends AbstractController
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['user'])) {
             $formData = $_POST['user'];
-            dump($formData);
 
             $errors = $this->validator->validate($formData, [
                 'username' => [
@@ -43,11 +42,13 @@ class UserController extends AbstractController
                 ],
             ]);
 
-            dump($errors);
+            
         }
 
         $this->view->render('user/register', [
             'title' => 'Rejoignez la communauté des BeerLovers 💖',
+        ], [
+            'formErrors' => $errors ?? [],
         ]);
     }
 }
