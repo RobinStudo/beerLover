@@ -9,12 +9,14 @@ use App\Core\Validator\Constraint;
 use App\Core\Validator\Validator;
 use App\Core\ViewManager;
 use App\Repository\UserRepository;
+use App\Service\MailerService;
 
 class UserController extends AbstractController
 {
     public function __construct(
         protected ViewManager $view,
         private Validator $validator,
+        private MailerService $mailerService,
         private NotificationManager $notificationManager,
         private UserRepository $userRepository
     ){
@@ -23,6 +25,9 @@ class UserController extends AbstractController
 
     public function register(): void
     {
+        $this->mailerService->send('coucou@gmail.com', 'Création de votre compte BeerLover', 'register');
+
+
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['user'])) {
             $formData = $_POST['user'];
 
@@ -53,9 +58,11 @@ class UserController extends AbstractController
 
                 $notification = new Notification('Compte créé avec succès', Notification::TYPE_SUCCESS);
                 $this->notificationManager->add($notification);
+
+                $this->mailerService->send($formData['email'], 'Création de votre compte BeerLover', 'register');
             }
-            
-            // Envoyer un mail de confirmation
+
+
             // Rediriger sur la page de connexion
         }
 
