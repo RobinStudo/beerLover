@@ -6,12 +6,14 @@ use App\Core\Controller\AbstractController;
 use App\Core\Validator\Constraint;
 use App\Core\Validator\Validator;
 use App\Core\ViewManager;
+use App\Repository\UserRepository;
 
 class UserController extends AbstractController
 {
     public function __construct(
         protected ViewManager $view,
-        private Validator $validator
+        private Validator $validator,
+        private UserRepository $userRepository
     ){
         parent::__construct($this->view);
     }
@@ -42,7 +44,15 @@ class UserController extends AbstractController
                 ],
             ]);
 
+            if (count($errors) === 0) {
+                $formData['hashedPassword'] = password_hash($formData['password'], PASSWORD_DEFAULT);
+                $this->userRepository->insert($formData);
 
+            }
+
+            // Afficher un message de confirmation
+            // Envoyer un mail de confirmation
+            // Rediriger sur la page de connexion
         }
 
         $this->view->render('user/register', [

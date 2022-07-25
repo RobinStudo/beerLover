@@ -9,7 +9,7 @@ use ReflectionMethod;
 // Un par table héritant du AbstractRepository
 abstract class AbstractRepository
 {
-    public function __construct(private DatabaseManager $database, private Container $container){}
+    public function __construct(protected DatabaseManager $database, private Container $container){}
 
     public abstract function getTable(): string;
     public abstract function getEntity(): string;

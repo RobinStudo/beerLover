@@ -16,4 +16,14 @@ class UserRepository extends AbstractRepository
     {
         return User::class;
     }
+
+    public function insert(array $data): void
+    {
+        $query = 'INSERT INTO ' . $this->getTable() . ' (username, email, password) VALUES (:username, :email, :password)';
+        $this->database->query($query, [
+            'username' => htmlspecialchars($data['username']),
+            'email' => htmlspecialchars($data['email']),
+            'password' => $data['hashedPassword'],
+        ]);
+    }
 }
