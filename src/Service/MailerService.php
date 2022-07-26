@@ -11,14 +11,25 @@ class MailerService
     public function __construct(private ViewManager $viewManager)
     {
         ini_set('smtp_port', '8025');
-        ini_set('sendmail_from', self::DEFAULT_SENDER);
     }
 
-    public function send(string $to, string $subject, string $template): bool
+    public function sendRegistrationConfirmation($data): bool
+    {
+        return $this->send($data['email'], 'Création de votre compte BeerLover', 'register', [
+            'username' => $data['username'],
+        ]);
+    }
+
+    private function send(string $to, string $subject, string $template, array $context = []): bool
     {
         $path = sprintf('mail/%s', $template);
-        $message = $this->viewManager->build($path);
+        $message = $this->viewManager->build($path, $context);
 
-        return mail($to, $subject, $message);
+        $headers[] = 'MIME-Version: 1.0';
+        $headers[] = 'Content-type: text/html; charset=utf-8';
+        $headers[] = 'From: BeerLover <' . self::DEFAULT_SENDER . '>';
+        $encodedSubject = mb_encode_mimeheader($subject, 'utf-8');
+
+        return mail($to, $encodedSubject, $message, implode("\r\n", $headers));
     }
 }

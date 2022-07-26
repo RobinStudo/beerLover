@@ -19,9 +19,15 @@ class ViewManager
         require self::LAYOUT_TEMPLATE;
     }
 
-    public function build(string $path): string
+    public function build(string $path, array $context = []): string
     {
         $path = sprintf('../template/%s.php', $path);
-        return file_get_contents($path);
+
+        ob_start();
+        require $path;
+        $template = ob_get_contents();
+        ob_end_clean();
+        
+        return $template;
     }
 }

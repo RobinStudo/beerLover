@@ -6,7 +6,7 @@
         <title>Inscription confirmée</title>
     </head>
     <body>
-        <h1>Bienvenue USERNAME</h1>
+        <h1>Bienvenue <?php echo $context['username']; ?></h1>
         <h2>Création de votre compte BeerLover</h2>
         <p>
             Votre compte BeerLover à bien été créé

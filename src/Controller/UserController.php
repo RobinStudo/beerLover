@@ -25,9 +25,6 @@ class UserController extends AbstractController
 
     public function register(): void
     {
-        $this->mailerService->send('coucou@gmail.com', 'Création de votre compte BeerLover', 'register');
-
-
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['user'])) {
             $formData = $_POST['user'];
 
@@ -59,7 +56,7 @@ class UserController extends AbstractController
                 $notification = new Notification('Compte créé avec succès', Notification::TYPE_SUCCESS);
                 $this->notificationManager->add($notification);
 
-                $this->mailerService->send($formData['email'], 'Création de votre compte BeerLover', 'register');
+                $this->mailerService->sendRegistrationConfirmation($formData);
             }
 
 
