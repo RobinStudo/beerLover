@@ -32,4 +32,16 @@ class UserRepository extends AbstractRepository
         // Execution de la requête
         $this->database->query($query, $parameters);
     }
+
+    public function findByEmail(string $email): ?array
+    {
+        $query = 'SELECT * FROM ' . $this->getTable() . ' WHERE email = :email';
+
+        $parameters = [
+            'email' => $email,
+        ];
+
+        $results = $this->database->query($query, $parameters);
+        return $results[0] ?? null;
+    }
 }

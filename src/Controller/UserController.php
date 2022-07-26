@@ -11,6 +11,7 @@ use App\Core\ViewManager;
 use App\Entity\User;
 use App\Repository\UserRepository;
 use App\Service\MailerService;
+use App\Service\UserService;
 
 class UserController extends AbstractController
 {
@@ -20,7 +21,8 @@ class UserController extends AbstractController
         private Router $router,
         private MailerService $mailerService,
         private NotificationManager $notificationManager,
-        private UserRepository $userRepository
+        private UserRepository $userRepository,
+        private UserService $userService
     ){
         parent::__construct($this->view);
     }
@@ -55,6 +57,24 @@ class UserController extends AbstractController
 
     public function login(): void
     {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['user'])) {
+            $formData = $_POST['user'];
 
+            if($this->userService->authenticate($formData)){
+                $notification = new Notification('Connexion réussie', Notification::TYPE_SUCCESS);
+                $this->notificationManager->add($notification);
+
+                $this->router->redirect('mainHome');
+            }
+
+            $notification = new Notification('Identifiants invalides', Notification::TYPE_ERROR);
+            $this->notificationManager->add($notification);
+        }
+
+        $this->view->render('user/login', [
+            'title' => 'Connectez-vous - BeerLover',
+        ], [
+            'formData' => $formData ?? [],
+        ]);
     }
 }

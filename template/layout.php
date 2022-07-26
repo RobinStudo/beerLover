@@ -13,8 +13,12 @@
             </a>
             <div>
                 <div class="user-account">
-                    <a href="<?php echo $this->router->buildLink('userRegister'); ?>">Inscription</a>
-                    <a href="#">Se connecter</a>
+                    <?php if($this->userService->isAuthenticated()) { ?>
+                        Connecté
+                    <?php } else { ?>
+                        <a href="<?php echo $this->router->buildLink('userRegister'); ?>">Inscription</a>
+                        <a href="<?php echo $this->router->buildLink('userLogin'); ?>">Se connecter</a>
+                    <?php } ?>
                 </div>
                 <nav>
                     <ul>

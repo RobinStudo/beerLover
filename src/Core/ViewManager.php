@@ -3,13 +3,18 @@ namespace App\Core;
 
 use App\Core\Notification\NotificationManager;
 use App\Core\Router\Router;
+use App\Service\UserService;
 
 // Gestionnaire des vues
 class ViewManager
 {
     const LAYOUT_TEMPLATE = '../template/layout.php';
 
-    public function __construct(private NotificationManager $notificationManager, private Router $router){}
+    public function __construct(
+        private NotificationManager $notificationManager,
+        private Router $router,
+        private UserService $userService
+    ){}
 
     // Permet de rendre un template
     public function render(string $path, array $config = [], array $data = []): void
