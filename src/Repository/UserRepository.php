@@ -19,11 +19,17 @@ class UserRepository extends AbstractRepository
 
     public function insert(array $data): void
     {
+        // Préparation de la requête avec des étiquettes à la place de valeurs
         $query = 'INSERT INTO ' . $this->getTable() . ' (username, email, password) VALUES (:username, :email, :password)';
-        $this->database->query($query, [
+
+        // Préparation des valeurs de remplacement des étiquettes
+        $parameters = [
             'username' => htmlspecialchars($data['username']),
             'email' => htmlspecialchars($data['email']),
             'password' => $data['hashedPassword'],
-        ]);
+        ];
+
+        // Execution de la requête
+        $this->database->query($query, $parameters);
     }
 }
