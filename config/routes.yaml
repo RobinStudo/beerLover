@@ -27,3 +27,8 @@ userLogin:
     uri: /connexion
     controller: App\Controller\UserController
     method: login
+
+userLogout:
+    uri: /deconnexion
+    controller: App\Controller\UserController
+    method: logout

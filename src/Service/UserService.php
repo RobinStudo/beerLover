@@ -30,4 +30,9 @@ class UserService
     {
         return isset($_SESSION[self::SESSION_KEY]);
     }
+
+    public function logout(): void
+    {
+        unset($_SESSION[self::SESSION_KEY]);
+    }
 }

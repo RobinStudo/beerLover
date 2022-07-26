@@ -15,6 +15,7 @@
                 <div class="user-account">
                     <?php if($this->userService->isAuthenticated()) { ?>
                         Connecté
+                        <a href="<?php echo $this->router->buildLink('userLogout'); ?>">Se déconnecter</a>
                     <?php } else { ?>
                         <a href="<?php echo $this->router->buildLink('userRegister'); ?>">Inscription</a>
                         <a href="<?php echo $this->router->buildLink('userLogin'); ?>">Se connecter</a>

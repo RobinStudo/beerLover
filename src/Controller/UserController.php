@@ -77,4 +77,14 @@ class UserController extends AbstractController
             'formData' => $formData ?? [],
         ]);
     }
+
+    public function logout(): void
+    {
+        $this->userService->logout();
+
+        $notification = new Notification('Déconnexion réussie', Notification::TYPE_SUCCESS);
+        $this->notificationManager->add($notification);
+
+        $this->router->redirect('mainHome');
+    }
 }
