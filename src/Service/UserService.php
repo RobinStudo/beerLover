@@ -35,4 +35,9 @@ class UserService
     {
         unset($_SESSION[self::SESSION_KEY]);
     }
+
+    public function getAuthenticatedUserId(): int
+    {
+        return $_SESSION[self::SESSION_KEY];
+    }
 }

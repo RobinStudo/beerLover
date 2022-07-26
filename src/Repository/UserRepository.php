@@ -44,4 +44,16 @@ class UserRepository extends AbstractRepository
         $results = $this->database->query($query, $parameters);
         return $results[0] ?? null;
     }
+
+    public function toggleFavorite(int $userId, int $beerId): void
+    {
+        $query = 'INSERT INTO favorite (user_id, beer_id) VALUES (:userId, :beerId)';
+
+        $parameters = [
+            'userId' => $userId,
+            'beerId' => $beerId,
+        ];
+
+        $this->database->query($query, $parameters);
+    }
 }

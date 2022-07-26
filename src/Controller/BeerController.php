@@ -3,14 +3,20 @@
 namespace App\Controller;
 
 use App\Core\Controller\AbstractController;
+use App\Core\Router\Router;
 use App\Core\ViewManager;
 use App\Entity\Beer;
 use App\Repository\BeerRepository;
+use App\Repository\UserRepository;
+use App\Service\UserService;
 
 class BeerController extends AbstractController
 {
     public function __construct(
         protected ViewManager $view,
+        private Router $router,
+        private UserRepository $userRepository,
+        private UserService $userService,
         private BeerRepository $beerRepository
     ){
         parent::__construct($this->view);
@@ -42,5 +48,18 @@ class BeerController extends AbstractController
         ], [
             'beer' => $beer
         ]);
+    }
+
+    public function toggleFavorite(): void
+    {
+        if(!$this->userService->isAuthenticated()){
+            $this->router->redirect('userLogin');
+        }
+
+        $userId = $this->userService->getAuthenticatedUserId();
+        $beerId = $_GET['id'] ?? 0;
+
+        $this->userRepository->toggleFavorite($userId, $beerId);
+        $this->router->redirect('beerList');
     }
 }
