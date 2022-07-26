@@ -30,21 +30,22 @@ class Router
 
     public function buildLink(string $routeName): string
     {
-        foreach ($this->routes as $route) {
-            if ($route->getName() === $routeName) {
-                return $route->getUri();
-            }
-        }
-
-        throw new Exception("Unable to find route : " . $routeName);
+        return $this->findByName($routeName)->getUri();
     }
 
     public function redirect(string $routeName): void
     {
+        $route = $this->findByName($routeName);
+
+        header('Location: ' . $route->getUri());
+        exit();
+    }
+
+    private function findByName(string $routeName): Route
+    {
         foreach ($this->routes as $route) {
             if ($route->getName() === $routeName) {
-                header('Location: ' . $route->getUri());
-                exit();
+                return $route;
             }
         }
 
