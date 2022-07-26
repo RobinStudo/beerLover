@@ -22,3 +22,8 @@ userRegister:
     uri: /inscription
     controller: App\Controller\UserController
     method: register
+
+userLogin:
+    uri: /connexion
+    controller: App\Controller\UserController
+    method: login

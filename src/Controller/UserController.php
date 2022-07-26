@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Core\Controller\AbstractController;
 use App\Core\Notification\Notification;
 use App\Core\Notification\NotificationManager;
+use App\Core\Router\Router;
 use App\Core\Validator\Constraint;
 use App\Core\Validator\Validator;
 use App\Core\ViewManager;
@@ -16,6 +17,7 @@ class UserController extends AbstractController
     public function __construct(
         protected ViewManager $view,
         private Validator $validator,
+        private Router $router,
         private MailerService $mailerService,
         private NotificationManager $notificationManager,
         private UserRepository $userRepository
@@ -57,10 +59,9 @@ class UserController extends AbstractController
                 $this->notificationManager->add($notification);
 
                 $this->mailerService->sendRegistrationConfirmation($formData);
+
+                $this->router->redirect('userLogin');
             }
-
-
-            // Rediriger sur la page de connexion
         }
 
         $this->view->render('user/register', [
@@ -69,5 +70,10 @@ class UserController extends AbstractController
             'formErrors' => $errors ?? [],
             'formData' => $formData ?? [],
         ]);
+    }
+
+    public function login(): void
+    {
+        
     }
 }

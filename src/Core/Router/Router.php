@@ -39,6 +39,18 @@ class Router
         throw new Exception("Unable to find route : " . $routeName);
     }
 
+    public function redirect(string $routeName): void
+    {
+        foreach ($this->routes as $route) {
+            if ($route->getName() === $routeName) {
+                header('Location: ' . $route->getUri());
+                exit();
+            }
+        }
+
+        throw new Exception("Unable to find route : " . $routeName);
+    }
+
     private function loadRoutes(): void
     {
         $loadedRoutes = yaml_parse_file(self::CONFIG_PATH);
