@@ -6,9 +6,9 @@ use App\Core\Controller\AbstractController;
 use App\Core\Notification\Notification;
 use App\Core\Notification\NotificationManager;
 use App\Core\Router\Router;
-use App\Core\Validator\Constraint;
 use App\Core\Validator\Validator;
 use App\Core\ViewManager;
+use App\Entity\User;
 use App\Repository\UserRepository;
 use App\Service\MailerService;
 
@@ -30,26 +30,7 @@ class UserController extends AbstractController
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['user'])) {
             $formData = $_POST['user'];
 
-            $errors = $this->validator->validate($formData, [
-                'username' => [
-                    new Constraint\NotBlank("Vous devez saisir un nom d'utilisateur"),
-                    new Constraint\Length("Votre nom d'utilisateur doit contenir entre 5 et 25 caractères", 5, 25),
-                ],
-                'email' => [
-                    new Constraint\NotBlank("Vous devez saisir un e-mail"),
-                    new Constraint\Email(),
-                ],
-                'password' => [
-                    new Constraint\NotBlank("Vous devez saisir un mot de passe"),
-                    new Constraint\Length("Votre mot de passe doit contenir entre 8 et 30 caractères", 8, 30),
-                ],
-                'age' => [
-                    new Constraint\NotBlank("Vous devez être majeur pour créer un compte"),
-                ],
-                'cgu' => [
-                    new Constraint\NotBlank("Vous devez accepter les conditions du service"),
-                ],
-            ]);
+            $errors = $this->validator->validate($formData, User::registerValidationRules());
 
             if (count($errors) === 0) {
                 $formData['hashedPassword'] = password_hash($formData['password'], PASSWORD_DEFAULT);
@@ -74,6 +55,6 @@ class UserController extends AbstractController
 
     public function login(): void
     {
-        
+
     }
 }
