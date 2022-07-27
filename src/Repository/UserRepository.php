@@ -45,7 +45,7 @@ class UserRepository extends AbstractRepository
         return $results[0] ?? null;
     }
 
-    public function toggleFavorite(int $userId, int $beerId): void
+    public function addFavorite(int $userId, int $beerId): void
     {
         $query = 'INSERT INTO favorite (user_id, beer_id) VALUES (:userId, :beerId)';
 
@@ -55,5 +55,30 @@ class UserRepository extends AbstractRepository
         ];
 
         $this->database->query($query, $parameters);
+    }
+
+    public function removeFavorite(int $userId, int $beerId): void
+    {
+        $query = 'DELETE FROM favorite WHERE user_id = :userId AND beer_id = :beerId';
+
+        $parameters = [
+            'userId' => $userId,
+            'beerId' => $beerId,
+        ];
+
+        $this->database->query($query, $parameters);
+    }
+
+    public function hasFavorite(int $userId, int $beerId): bool
+    {
+        $query = 'SELECT COUNT(*) AS counter FROM favorite WHERE user_id = :userId AND beer_id = :beerId';
+
+        $parameters = [
+            'userId' => $userId,
+            'beerId' => $beerId,
+        ];
+
+        $results = $this->database->query($query, $parameters);
+        return $results[0]['counter'] > 0;
     }
 }

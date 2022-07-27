@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use App\Core\Controller\AbstractController;
+use App\Core\Notification\Notification;
+use App\Core\Notification\NotificationManager;
 use App\Core\Router\Router;
 use App\Core\ViewManager;
 use App\Entity\Beer;
@@ -14,6 +16,7 @@ class BeerController extends AbstractController
 {
     public function __construct(
         protected ViewManager $view,
+        private NotificationManager $notificationManager,
         private Router $router,
         private UserRepository $userRepository,
         private UserService $userService,
@@ -43,10 +46,18 @@ class BeerController extends AbstractController
             return;
         }
 
+        $userId = $this->userService->getAuthenticatedUserId();
+        if($userId){
+            $currentUserHasFavorite = $this->userRepository->hasFavorite($userId, $beer->getId());
+        }else{
+            $currentUserHasFavorite = false;
+        }
+
         $this->view->render('beer/single', [
             'title' => sprintf('%s - BeerLover', $beer->getName()),
         ], [
-            'beer' => $beer
+            'beer' => $beer,
+            'currentUserHasFavorite' => $currentUserHasFavorite,
         ]);
     }
 
@@ -59,7 +70,15 @@ class BeerController extends AbstractController
         $userId = $this->userService->getAuthenticatedUserId();
         $beerId = $_GET['id'] ?? 0;
 
-        $this->userRepository->toggleFavorite($userId, $beerId);
+        if($this->userRepository->hasFavorite($userId, $beerId)){
+            $this->userRepository->removeFavorite($userId, $beerId);
+            $notification = new Notification('Bière retiré des favoris', Notification::TYPE_SUCCESS);
+        }else{
+            $this->userRepository->addFavorite($userId, $beerId);
+            $notification = new Notification('Bière ajouté aux favoris', Notification::TYPE_SUCCESS);
+        }
+
+        $this->notificationManager->add($notification);
         $this->router->redirect('beerList');
     }
 }

@@ -4,6 +4,10 @@
     <img src="<?php echo $data['beer']->getPicture(); ?>" alt="<?php echo $data['beer']->getName(); ?>">
     <p><?php echo $data['beer']->getStyle()->getName(); ?></p>
     <a href="<?php echo $this->router->buildLink('beerToggleFavorite') . '?id=' . $data['beer']->getId(); ?>">
-        Ajouter aux favoris
+        <?php if($data['currentUserHasFavorite']) { ?>
+            Retirer des favoris
+        <?php } else { ?>
+            Ajouter aux favoris
+        <?php } ?>
     </a>
 </div>
